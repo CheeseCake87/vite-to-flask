@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+[data-theme='normal'] {
+    --html-body-bg-color: #eeeeee;
+    --html-default-text-color: #0b0b0b;
+}
+
+body {
+    background-color: var(--html-body-bg-color);
+    color: var(--html-default-text-color);
+}

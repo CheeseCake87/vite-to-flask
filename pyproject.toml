@@ -1,0 +1,30 @@
+[build-system]
+requires = ["flit_core >=3.2,<4"]
+build-backend = "flit_core.buildapi"
+
+[project]
+name = "vite-to-flask"
+description = 'Transport Vite apps to Flask / Flask blueprints.'
+authors = [{ name = "David Carmichael", email = "david@uilix.com" }]
+readme = "README.md"
+license = { file = "LICENSE" }
+classifiers = [
+    'Programming Language :: Python :: 3.8',
+    'Programming Language :: Python :: 3.9',
+    'Programming Language :: Python :: 3.10',
+    'Programming Language :: Python :: 3.11',
+    'Programming Language :: Python :: 3.12',
+    'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
+    'Natural Language :: English',
+]
+requires-python = ">=3.8"
+dynamic = ["version"]
+dependencies = ['flask']
+
+[project.scripts]
+vtf = "vite_to_flask:_cli"
+
+[tool.vtf]
+npx_exec = "npx"
+flask_app_dir = "app_flask_demo"
+vite_app_dirs = ["app_vite_demo"]
