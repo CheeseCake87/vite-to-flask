@@ -12,6 +12,8 @@ def setup_blueprints(app):
 def create_app():
     app = Flask(__name__)
 
+    # app.config["VTF_DISABLE_DEBUG_CORS"] = True
+
     vite_to_flask.init_app(app)
 
     setup_blueprints(app)

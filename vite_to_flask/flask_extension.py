@@ -5,6 +5,7 @@ from flask import Flask, url_for, send_from_directory
 from markupsafe import Markup
 
 from ._html_tags import BodyContent, ScriptTag, LinkTag
+from .helpers import Colr
 
 
 class ViteToFlask:
@@ -97,9 +98,15 @@ class ViteToFlask:
 
     @staticmethod
     def _load_cors_headers(app: Flask) -> None:
-        @app.after_request
-        def after_request(response):
-            response.headers["Access-Control-Allow-Origin"] = "*"
-            response.headers["Access-Control-Allow-Headers"] = "*"
-            response.headers["Access-Control-Allow-Methods"] = "*"
-            return response
+        if app.debug and not app.config.get('VTF_DISABLE_DEBUG_CORS', False):
+            print(f"{Colr.OKCYAN}{Colr.BOLD}vite-to-flask: Flask debug mode detected"
+                  f"{Colr.END}{Colr.END}\n\r"
+                  f"{Colr.OKCYAN}Allow all CORS headers will be added to "
+                  f"every response to allow for frontend development.{Colr.END}")
+
+            @app.after_request
+            def after_request(response):
+                response.headers["Access-Control-Allow-Origin"] = "*"
+                response.headers["Access-Control-Allow-Headers"] = "*"
+                response.headers["Access-Control-Allow-Methods"] = "*"
+                return response

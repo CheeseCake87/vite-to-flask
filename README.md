@@ -96,7 +96,7 @@ def __vtf(vite_app: str, filename: str):
 vite-to-flask will add the following CORS headers to the Flask app, only in debug mode:
 
 ```python
-if self.app.debug:
+if app.debug and not app.config.get('VTF_DISABLE_DEBUG_CORS', False):
     @app.after_request
     def add_cors_headers(response):
         response.headers["Access-Control-Allow-Origin"] = "*"
@@ -106,6 +106,9 @@ if self.app.debug:
 ```
 
 This is to allow the Vite app to communicate with the Flask app during development.
+
+As you can probably work out, you can disable this behavior by setting a Flask config value
+of `VTF_DISABLE_DEBUG_CORS` to `True`
 
 ## Running the example
 
