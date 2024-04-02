@@ -41,20 +41,21 @@ class ViteToFlask:
             if folder.is_dir():
                 self.app.config["VTF_APPS"].update({folder.name: folder})
 
-        self._load_routes()
-        self._load_context_processor()
-        self._load_cors_headers()
+        self._load_routes(app)
+        self._load_context_processor(app)
+        self._load_cors_headers(app)
 
-    def _load_routes(self) -> None:
-        @self.app.route("/__vtf/<vite_app>/<filename>")
+    def _load_routes(self, app: Flask) -> None:
+        @app.route("/__vtf/<vite_app>/<filename>")
         def __vtf(vite_app: str, filename: str):
             return send_from_directory(self.vtf_root_path / vite_app, filename)
 
-    def _load_context_processor(self) -> None:
-        @self.app.context_processor
+    @staticmethod
+    def _load_context_processor(app: Flask) -> None:
+        @app.context_processor
         def vtf_head_processor():
             def vtf_head(vite_app: str) -> t.Any:
-                vite_assets = Path(self.app.root_path) / "vtf" / vite_app
+                vite_assets = Path(app.root_path) / "vtf" / vite_app
                 find_vite_js = vite_assets.glob("*.js")
                 find_vite_css = vite_assets.glob("*.css")
 
@@ -84,7 +85,7 @@ class ViteToFlask:
 
             return dict(vtf_head=vtf_head)
 
-        @self.app.context_processor
+        @app.context_processor
         def vtf_body_processor():
             def vtf_body(
                     root_id: str = "root",
@@ -94,11 +95,11 @@ class ViteToFlask:
 
             return dict(vtf_body=vtf_body)
 
-    def _load_cors_headers(self) -> None:
-        if self.app.debug:
-            @self.app.after_request
-            def add_cors_headers(response):
-                response.headers["Access-Control-Allow-Origin"] = "*"
-                response.headers["Access-Control-Allow-Headers"] = "*"
-                response.headers["Access-Control-Allow-Methods"] = "*"
-                return response
+    @staticmethod
+    def _load_cors_headers(app: Flask) -> None:
+        @app.after_request
+        def after_request(response):
+            response.headers["Access-Control-Allow-Origin"] = "*"
+            response.headers["Access-Control-Allow-Headers"] = "*"
+            response.headers["Access-Control-Allow-Methods"] = "*"
+            return response
