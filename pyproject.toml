@@ -24,6 +24,10 @@ dependencies = ['flask']
 [project.scripts]
 vtf = "vite_to_flask:_cli"
 
+[tool.pyqwe]
+build = "*:flit build"
+publish = "*shell:export FLIT_USERNAME=__token__ && flit publish"
+
 [tool.vtf]
 npx_exec = "npx"
 flask_app_dir = "app_flask_demo"
