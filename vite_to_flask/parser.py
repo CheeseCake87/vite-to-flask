@@ -11,14 +11,16 @@ class ArgumentParser(argparse.ArgumentParser):
     def print_help(self, file=None):
         print(
             "\n\r"
-            "Usage: vtf <command>"
+            "Usage: vtf <option>"
             "\n\r\n\r"
-            f" {Colr.BOLD}compile{Colr.END} => Attempt to compile all vite apps"
+            f" {Colr.OKCYAN}list{Colr.END} => List all vite apps in pyproject.toml"
             "\n\r"
-            f" {Colr.BOLD}list{Colr.END} => List all vite apps in pyproject.toml"
+            f" {Colr.OKCYAN}compile (-y){Colr.END} => Attempt to compile all vite apps"
             "\n\r"
-            f" {Colr.BOLD}-h, --help{Colr.END} => Show the help message and exit"
+            f"  | {Colr.OKCYAN}-y{Colr.END} => Accept all prompts while compiling"
             "\n\r"
-            f" {Colr.BOLD}-v, --version{Colr.END} => Show the version and exit"
+            f" {Colr.OKCYAN}-h, --help{Colr.END} => Show the help message and exit"
+            "\n\r"
+            f" {Colr.OKCYAN}-v, --version{Colr.END} => Show the version and exit"
         )
         print("")
