@@ -4,7 +4,7 @@ from .flask_extension import ViteToFlask
 from .helpers import PyProjectConfig, _compile, Colr
 from .parser import ArgumentParser
 
-__version__ = "0.4.0"
+__version__ = "0.5.0"
 __all__ = ["ViteToFlask"]
 
 
@@ -35,7 +35,6 @@ def _cli():
 
         args = pars.parse_args()
 
-        print(args)
         if hasattr(args, "compile"):
             _compile(
                 pyproject,
