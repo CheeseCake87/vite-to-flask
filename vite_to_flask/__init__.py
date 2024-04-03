@@ -36,6 +36,8 @@ def _cli():
 
         if hasattr(args, "compile"):
             _compile(pyproject, pars.vite_apps)
+
+            # exit after compiling
             sys.exit(0)
 
         if hasattr(args, "list"):
@@ -53,6 +55,9 @@ def _cli():
                         f"{app.get('flask_app_dir')}/vtf/{app.get('vite_app')}/"
                     )
             print("")
+
+            # exit after listing
             sys.exit(0)
 
+    # print help if no command is given
     pars.print_help()
