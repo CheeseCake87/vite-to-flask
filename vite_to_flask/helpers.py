@@ -98,6 +98,8 @@ def _compile(pypro: PyProjectConfig, vite_apps: list[dict]):
                 shutil.rmtree(item)
             else:
                 item.unlink()
+    else:
+        flask_vtf_dir.mkdir()
 
     # Create directories for vite apps
     for app in vite_apps:
