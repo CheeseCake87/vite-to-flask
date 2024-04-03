@@ -89,8 +89,8 @@ class ViteToFlask:
         @app.context_processor
         def vtf_body_processor():
             def vtf_body(
-                    root_id: str = "root",
-                    noscript_message: str = "You need to enable JavaScript to run this app.",
+                root_id: str = "root",
+                noscript_message: str = "You need to enable JavaScript to run this app.",
             ) -> t.Any:
                 return BodyContent(root_id, noscript_message)()
 
@@ -98,11 +98,13 @@ class ViteToFlask:
 
     @staticmethod
     def _load_cors_headers(app: Flask) -> None:
-        if app.debug and not app.config.get('VTF_DISABLE_DEBUG_CORS', False):
-            print(f"{Colr.OKCYAN}{Colr.BOLD}vite-to-flask: Flask debug mode detected"
-                  f"{Colr.END}{Colr.END}\n\r"
-                  f"{Colr.OKCYAN}Allow all CORS headers will be added to "
-                  f"every response to allow for frontend development.{Colr.END}")
+        if app.debug and not app.config.get("VTF_DISABLE_DEBUG_CORS", False):
+            print(
+                f"{Colr.OKCYAN}{Colr.BOLD}vite-to-flask: Flask debug mode detected"
+                f"{Colr.END}{Colr.END}\n\r"
+                f"{Colr.OKCYAN}Allow all CORS headers will be added to "
+                f"every response to allow for frontend development.{Colr.END}"
+            )
 
             @app.after_request
             def after_request(response):

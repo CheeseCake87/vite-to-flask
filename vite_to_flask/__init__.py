@@ -19,6 +19,7 @@ def _cli():
 
     compile_parser = subparsers.add_parser("compile")
     compile_parser.set_defaults(compile=False)
+    compile_parser.add_argument("-y", action="store_true")
 
     list_parser = subparsers.add_parser("list")
     list_parser.set_defaults(list=False)
@@ -34,17 +35,19 @@ def _cli():
 
         args = pars.parse_args()
 
+        print(args)
         if hasattr(args, "compile"):
-            _compile(pyproject, pars.vite_apps)
+            _compile(
+                pyproject,
+                pars.vite_apps,
+                replace=True if hasattr(args, "y") and args.y else False,
+            )
 
             # exit after compiling
             sys.exit(0)
 
         if hasattr(args, "list"):
-            print(
-                "\n\r"
-                "Vite apps in pyproject.toml:"
-            )
+            print("\n\r" "Vite apps in pyproject.toml:")
             if not pars.vite_apps:
                 print(f" {Colr.WARNING}No vite apps found in pyproject.toml{Colr.END}")
             else:

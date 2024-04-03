@@ -1,6 +1,7 @@
 import shlex
 import shutil
 import subprocess
+import sys
 from pathlib import Path
 from tomllib import loads
 
@@ -87,17 +88,32 @@ class NPXCommander:
         pass
 
 
-def _compile(pypro: PyProjectConfig, vite_apps: list[dict]):
+def _compile(pypro: PyProjectConfig, vite_apps: list[dict], replace: bool = False):
     print("Compiling Vite apps...")
     flask_vtf_dir = pypro.cwd / pypro.flask_app_dir / "vtf"
 
     # Delete contents of vtf_dir
     if flask_vtf_dir.exists():
-        for item in flask_vtf_dir.iterdir():
-            if item.is_dir():
-                shutil.rmtree(item)
-            else:
-                item.unlink()
+        if not replace:
+            prompt = input(
+                f"Continuing will replace the contents of \n\r"
+                f"{flask_vtf_dir} \n\r"
+                f"Do you want to continue? (Y/n): "
+            )
+        else:
+            prompt = "y"
+
+        if prompt.lower() == "y" or prompt == "":
+            for item in flask_vtf_dir.iterdir():
+                if item.is_dir():
+                    shutil.rmtree(item)
+                else:
+                    item.unlink()
+
+        else:
+            print("Operation aborted.")
+            sys.exit(0)
+
     else:
         flask_vtf_dir.mkdir()
 

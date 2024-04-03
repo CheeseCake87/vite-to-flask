@@ -17,12 +17,12 @@ class LinkTag:
     _hreflang: str = None
 
     def __init__(
-            self,
-            rel: str,
-            href: Optional[str] = None,
-            sizes: Optional[str] = None,
-            type_: Optional[str] = None,
-            hreflang: Optional[str] = None,
+        self,
+        rel: str,
+        href: Optional[str] = None,
+        sizes: Optional[str] = None,
+        type_: Optional[str] = None,
+        hreflang: Optional[str] = None,
     ):
         self.rel = rel
         self.href = href
@@ -80,15 +80,15 @@ class ScriptTag:
     _referrerpolicy: str = None
 
     def __init__(
-            self,
-            src: str,
-            type_: Optional[str] = None,
-            async_: bool = False,
-            defer: bool = False,
-            crossorigin: Optional[str] = None,
-            integrity: Optional[str] = None,
-            nomodule: bool = False,
-            referrerpolicy: Optional[str] = None,
+        self,
+        src: str,
+        type_: Optional[str] = None,
+        async_: bool = False,
+        defer: bool = False,
+        crossorigin: Optional[str] = None,
+        integrity: Optional[str] = None,
+        nomodule: bool = False,
+        referrerpolicy: Optional[str] = None,
     ):
         self.src = src
         self.type = type_
@@ -147,9 +147,9 @@ class BodyContent:
     noscript_message: str = None
 
     def __init__(
-            self,
-            div_id: str = "root",
-            noscript_message: str = "You need to enable JavaScript to run this app.",
+        self,
+        div_id: str = "root",
+        noscript_message: str = "You need to enable JavaScript to run this app.",
     ):
         self.div_id = div_id
         self.noscript_message = noscript_message
