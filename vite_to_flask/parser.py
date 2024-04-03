@@ -13,7 +13,7 @@ class ArgumentParser(argparse.ArgumentParser):
             "\n\r"
             "Usage: vtf <option>"
             "\n\r\n\r"
-            f" {Colr.OKCYAN}list{Colr.END} => List all vite apps in pyproject.toml"
+            f" {Colr.OKCYAN}list, ls{Colr.END} => List all vite apps in pyproject.toml"
             "\n\r"
             f" {Colr.OKCYAN}compile (-y){Colr.END} => Attempt to compile all vite apps"
             "\n\r"

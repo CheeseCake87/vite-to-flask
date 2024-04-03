@@ -4,7 +4,7 @@ from .flask_extension import ViteToFlask
 from .helpers import PyProjectConfig, _compile, Colr
 from .parser import ArgumentParser
 
-__version__ = "0.6.0"
+__version__ = "0.7.0"
 __all__ = ["ViteToFlask"]
 
 
@@ -23,6 +23,9 @@ def _cli():
 
     list_parser = subparsers.add_parser("list")
     list_parser.set_defaults(list=False)
+
+    ls_parser = subparsers.add_parser("ls")
+    ls_parser.set_defaults(list=False)
 
     with PyProjectConfig() as pyproject:
         for vite_app in pyproject.vite_apps:
@@ -45,16 +48,16 @@ def _cli():
             # exit after compiling
             sys.exit(0)
 
-        if hasattr(args, "list"):
-            print("\n\r" "Vite apps in pyproject.toml:")
+        if hasattr(args, "list") or hasattr(args, "ls"):
+            print("")
             if not pars.vite_apps:
                 print(f" {Colr.WARNING}No vite apps found in pyproject.toml{Colr.END}")
             else:
                 for app in pars.vite_apps:
                     print(
-                        f" {Colr.OKCYAN}{app.get('vite_app')}{Colr.END} "
+                        f"{Colr.OKGREEN}{app.get('vite_app')}/dist/assets{Colr.END} "
                         f"{Colr.BOLD}=>{Colr.END} "
-                        f"{app.get('flask_app_dir')}/vtf/{app.get('vite_app')}/"
+                        f"{Colr.OKGREEN}{app.get('flask_app_dir')}/vtf/{app.get('vite_app')}/{Colr.END}"
                     )
             print("")
 
