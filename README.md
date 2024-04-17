@@ -1,6 +1,6 @@
 ## 🎒 Project has moved to [vite-transporter](https://github.com/CheeseCake87/vite-transporter)
 
-**Note:: This repo will be archived soon**
+**Note:: This project will be archived and no longer maintained.**
 
 ---
 
