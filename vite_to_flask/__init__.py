@@ -4,7 +4,7 @@ from .flask_extension import ViteToFlask
 from .helpers import PyProjectConfig, _compile, Colr
 from .parser import ArgumentParser
 
-__version__ = "0.7.0"
+__version__ = "0.7.1"
 __all__ = ["ViteToFlask"]
 
 
